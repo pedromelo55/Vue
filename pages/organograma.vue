@@ -32,6 +32,7 @@
 
 <script>
     import { defineComponent,ref,reactive } from 'vue';
+    //import { DirectusAuthResponse} from 'nuxt-directus/dist/runtime/types';
 
 export default defineComponent({
 

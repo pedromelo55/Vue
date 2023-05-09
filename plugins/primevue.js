@@ -2,7 +2,6 @@ import { defineNuxtPlugin } from "#app";
 // import PrimeVue from "primevue/config";
 // import Button from "primevue/button";
 // import OrganizationChart from "primevue/organizationchart";
-
 import VueBlocksTree from 'vue3-blocks-tree';
 import 'vue3-blocks-tree/dist/vue3-blocks-tree.css';
 
@@ -15,3 +14,4 @@ export default defineNuxtPlugin((nuxtApp) => {
   //other components that you need
  // nuxtApp.vueApp.component("OrganizationChart", OrganizationChart);
 });
+

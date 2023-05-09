@@ -1,8 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     modules: [
-        '@nuxtjs/tailwindcss'
+        '@nuxtjs/tailwindcss',
+        'nuxt-directus'
     ],
+    directus: {
+        url: "https://sgi.desenvolvimento.go.gov.br/parametros-bi/"
+      },
     app: {
         head: {
             title: 'ShopApp',
