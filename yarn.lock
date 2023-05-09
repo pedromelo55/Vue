@@ -4962,6 +4962,11 @@ vue-router@^4.1.6:
   dependencies:
     "@vue/devtools-api" "^6.4.5"
 
+vue3-blocks-tree@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/vue3-blocks-tree/-/vue3-blocks-tree-0.6.1.tgz#0334cf6b876bb67e213bf946b47c57e247323612"
+  integrity sha512-/B+a0801YyxKlUH+glPVyOlxTrpLjjRkpfRaiOZWsXCkDdFfW8LVkmAawrFEAUd/F1HFZlx5C1PtnfyYNAPZfQ==
+
 vue@^3.2.47:
   version "3.2.47"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.47.tgz#3eb736cbc606fc87038dbba6a154707c8a34cff0"
