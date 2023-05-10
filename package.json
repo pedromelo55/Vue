@@ -11,7 +11,9 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@types/node": "^18",
-    "nuxt": "^3.4.2"
+    "nuxt": "^3.4.2",
+    "nuxt-directus": "^5.2.1",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "vue3-blocks-tree": "^0.6.1"

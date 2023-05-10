@@ -4,24 +4,6 @@
         <blocks-tree :data="treeData" :horizontal="treeOrientation=='1'"  :collapsable="true"></blocks-tree>
     </div>
 
-    <h1>With slots</h1>
-    <div>
-        <blocks-tree :data="treeData" :horizontal="treeOrientation=='1'" :collapsable="true" :props="{label: 'label', expand: 'expand', children: 'children',  key:'some_id'}">
-        <template #node="{data,context}">
-            <span>
-                <input type="checkbox" :checked="selected.indexOf(data.some_id)> -1" @change="(e)=>toggleSelect(data,e.target.checked)"/> {{data.label}}
-            </span>
-            <br/>
-            <span v-if="data.children && data.children.length">
-                <a href="#" @click="context.toggleExpand">toggle expand</a>
-            </span>
-        </template>
-        </blocks-tree>
-        <div>
-        Selected: {{selected}}
-        </div>
-    </div>
-
     <h1>Change orientation</h1>
     <select v-model="treeOrientation">
         <option value="0">Vertical</option>
@@ -62,16 +44,70 @@ export default defineComponent({
                         { label: 'Gerência de Gestão e Desenvolvimento de Pessoas', some_id: 13 },
                         { label: 'Gerência de Apoio Administrativo e Logístico', some_id: 14 },
                         { label: 'Gerência de Contabilidade', some_id: 15 },
-                        {  
-                            label: 'subchild 2', 
-                            some_id: 16, 
+                    ]
+                },
+                { 
+                    label: 'Subsecretaria de Formação de Talentos e Transformação Digital', 
+                    some_id: 16, 
+                    expand: false, 
+                    children: [
+                        { 
+                            label: 'Superintendência de Capacitação e Formação Tecnológica', 
+                            some_id: 17, 
                             expand: false, 
                             children: [
-                                { label: 'subchild 11', some_id: 7 },
-                                { label: 'subchild 22', some_id: 8 },
+                                { label: 'Gerência de Políticas de Ciência, Tecnologia e Inovação', some_id: 18 },
+                                { label: 'Gerência de Educação Profissional e Tecnológica', some_id: 19 },
+                                { label: 'Gerência de Educação Superior', some_id: 20 },
+                                {
+                                    label: 'Coordenação de Escola do Futuro (6)',
+                                    some_id: 21,
+                                    expand: false,
+                                    children: [
+                                        { label: 'Assessoria de Educação e Inovação Tecnológica', some_id: 22}
+                                    ] 
+                                },
+                            ]
+                        },
+                        {  
+                            label: 'Superintendência de Transformação Digital', 
+                            some_id: 23, 
+                            expand: false, 
+                            children: [
+                                { label: 'Gerência de Apoio às Tecnologias Exponenciais', some_id: 24 },
+                                { label: 'Gerência de Fomento à Tecnologia Digital', some_id: 25 },
+                                { label: 'Gerência de Inovação para o Governo', some_id: 26 },
                             ]
                         },
                     ]
+                },
+                {
+                    label: 'Subsecretaria de Inovação e Desenvolvimento Sustentável',
+                    some_id: 27,
+                    expand: false,
+                    children: [
+                        {
+                            label: 'Superintendência de Inovação Tecnológica', 
+                            some_id: 28,
+                            expand: false,
+                            children: [
+                                { label: 'Gerência de Empreendedorismo, Startups e Cluster Produtivos', some_id: 29 },
+                                { label: 'Gerência de Ecossistema de Inovação', some_id: 30 },
+                                { label: 'Gerência de Internacionalização de Empreendimentos Inovadores', some_id: 31 },
+                                { label: 'Gerência de Articulação e Atração de Investimento para o Empreendedorismo Inovador', some_id: 32 }
+                            ]
+                        },
+                        {
+                            label: 'Superintendência de Desenvolvimento Sustentável', 
+                            some_id: 33,
+                            expand: false,
+                            children: [
+                                { label: 'Gerência de Formação da Cultura da Sustentabilidade', some_id: 34 },
+                                { label: 'Gerência de Difusão de C&T', some_id: 35 },
+                                { label: 'Gerência de Fomento a Tecnologia Social, Colaborativa e Sustentável', some_id: 36 },
+                            ]
+                        }
+                    ],
                 },
             ]
         });
