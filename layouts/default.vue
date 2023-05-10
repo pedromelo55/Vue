@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <header class="shadow-sm bg-white">
+    <div class="bg-white">
+        <header class="shadow-sm bg-slate-200">
             <nav class="container mx-auto p-4 flex justify-between">
-                <NuxtLink to="/" class="font-bold">Nuxt Dojo</NuxtLink>
-                <ul class="flex gap-4">
+                <div class="flex gap-5">
+                    <img src="../layouts/img/goias-secti.svg" alt="Logo SECTI" class="w-20 h-15">
+                    <NuxtLink to="/" class="font-bold text-black">SECTI</NuxtLink>
+                </div>
+                <ul class="flex gap-4 text-black">
                     <li><NuxtLink to="/">Home</NuxtLink></li>
                     <li><NuxtLink to="/servidores">Servidores</NuxtLink></li>
                     <li><NuxtLink to="/organograma">Organograma</NuxtLink></li>
