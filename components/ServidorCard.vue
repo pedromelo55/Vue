@@ -22,8 +22,8 @@
         </div>
         <div class="flex flex-col items-center pb-10">
             <img class="w-24 h-28 mb-3 rounded-full shadow-lg" src="https://sgi.desenvolvimento.go.gov.br/perfil/70751058173.jpg" alt="Bonnie image"/>
-            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Pedro Melo</h5>
-            <h6 class="mb-1 text-l font-medium text-gray-600 dark:text-white">Gerência de Tecnologia</h6>
+            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{servidores[0].nome}}</h5>
+            <h6 class="mb-1 text-l font-medium text-gray-600 dark:text-white">gerencia</h6>
             <span class="text-sm text-gray-500 dark:text-gray-400">Estagiário</span>
             <div class="flex mt-4 space-x-3 md:mt-6">
                 <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add friend</a>
@@ -33,7 +33,29 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+    // const app = await useFetch('https://sgi.desenvolvimento.go.gov.br/parametros-bi/items/servidores')
+    const { getItems } = useDirectusItems();
+//     interface Article {
+//   CPF: string | number;
+//   title: string;
+//   content: string;
+//   status: string;
+// }
+const fetchArticles = async () => {
+  try {
+    const filters = { content: "testcontent", title: "Test1" };
+    const items = await getItems({
+      collection: "servidores",
+      params: {
+        // filter: filters,
+      },
+    });
+    return items
+  } catch (e) {}
+};
+
+const servidores = await fetchArticles();
 
 </script>
 

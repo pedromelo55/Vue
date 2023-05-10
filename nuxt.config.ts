@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss', 
-        'nuxt-directus'
+        'nuxt-directus',
     ],
     directus: {
         url: "https://sgi.desenvolvimento.go.gov.br/parametros-bi/"
@@ -22,6 +22,5 @@ export default defineNuxtConfig({
     },
     build: {
         transpile: ['primevue']
-    }
-
+    },
 })
