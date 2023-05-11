@@ -8,9 +8,9 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            title: 'ShopApp',
+            title: 'Organização SECTI',
             meta: [
-                { name: 'description', content: 'Everything about Nuxt 3' }
+                { name: 'description', content: 'Organização interna da SECTI' }
             ],
             link: [
                 { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
