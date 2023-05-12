@@ -23,9 +23,9 @@
             </div>
         </div>
         <div class="flex flex-col items-center pb-10">
-            <img class="w-24 h-28 mb-3 rounded-full shadow-lg" :src="'https://sgi.desenvolvimento.go.gov.br/perfil/' + servidores[0].cpf + '.jpg'" alt="Imagem do servidor"/>
-            <h5 class="mb-1 text-center text-xl font-medium text-gray-900 dark:text-white">{{ servidores[0].nome }}</h5>
-            <h6 class="mb-1 text-center text-l font-medium text-gray-600 dark:text-white">{{ servidores[0].lotacao.unidade }}</h6>
+            <img class="w-24 h-28 mb-3 rounded-full shadow-lg" :src="'https://sgi.desenvolvimento.go.gov.br/perfil/' + servidor.cpf + '.jpg'" alt="Imagem do servidor"/>
+            <h5 class="mb-1 text-center text-xl font-medium text-gray-900 dark:text-white">{{ servidor.nome }}</h5>
+            <h6 class="mb-1 text-center text-l font-medium text-gray-600 dark:text-white">{{ servidor.lotacao.unidade }}</h6>
             <span class="text-sm text-gray-500 dark:text-gray-400">Talvez colocar cargo</span>
             <div class="flex mt-4 space-x-3 md:mt-6">
                 <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700
@@ -39,34 +39,42 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+
+
     // const app = await useFetch('https://sgi.desenvolvimento.go.gov.br/parametros-bi/items/servidores')
     const { getItems } = useDirectusItems();
-//     interface Article {
-//   CPF: string | number;
-//   title: string;
-//   content: string;
-//   status: string;
+//  interface Article {
+//      CPF: string | number;
+//      title: string;
+//      content: string;
+//      status: string;
 // }
-const fetchArticles = async () => {
-  try {
-    const filters = { content: "testcontent", title: "Test1" };
-    const items = await getItems({
-      collection: "servidores",
-      params: {
-        // filter: filters,
-        fields: [
-            "*.*"
-      ]
-      },
-    });
-    return items
-  } catch (e) {}
-};
+    const fetchArticles = async () => {
+        try {
+            const filters = { content: "testcontent", title: "Test1" };
+            const items = await getItems({
+            collection: "servidores",
+            params: {
+                // filter: filters,
+                fields: [
+                    "*.*"
+                ]
+            },
+        });
+            return items
+        } catch (e) {}
+    };
 
-// function enderecoImagem = () => {}
+    // function enderecoImagem = () => {}
 
-const servidores = await fetchArticles();
+    const servidores = await fetchArticles();
+
+    
+const props = defineProps(['servidor'])
+
+
+
 
 </script>
 
