@@ -47,7 +47,7 @@
 <!-- colocar uma busca na tela -->
 <!-- deixar uma opção para editar o cargo, unidade  -->
 <!-- no organograma um jeito de (interface) definir o responsável pela unidade -->
-
+<!-- colocar mais páginas em servidores para mostar todo mundo -->
 
 <!-- emit pega dados e joga para fora emitindo um evento -->
 <!-- props e para exportar dados para outro componente -->
