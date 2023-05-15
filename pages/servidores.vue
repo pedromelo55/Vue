@@ -5,10 +5,8 @@
         ipsum expedita doloremque modi incidunt itaque quis asperiores consequatur repellat.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam debitis,
         ipsum expedita doloremque modi incidunt itaque quis asperiores consequatur repellat.</p>
-        <div class="grid grid-cols-4 gap-5">
-            <div v-for="(item, i) in servidores" :key="i">
-                <div><ServidorCard :servidor="item"/></div>
-            </div>
+        <div class="grid grid-cols-4 gap-5 items-stretch">
+          <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
         </div>
     </div>
 </template>
@@ -22,14 +20,18 @@
       const items = await getItems({
         collection: "servidores",
         params: {
-          // filter: filters,
-        },
+                // filter: filters,
+                fields: [
+                    "*.*"
+                ]
+            },
       });
       return items
     } catch (e) {}
 };
 
   const servidores = await fetchArticles();
+  // console.log(servidores);
 
   
 </script>
