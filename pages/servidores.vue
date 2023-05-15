@@ -8,10 +8,15 @@
         <div class="grid grid-cols-4 gap-5 items-stretch">
           <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
         </div>
+        <div>
+          <Pagination/>
+        </div>
     </div>
 </template>
 
 <script setup>
+import Pagination from '~/components/pagination.vue';
+
   const { getItems } = useDirectusItems();
 
   const fetchArticles = async () => {
@@ -23,7 +28,9 @@
                 // filter: filters,
                 fields: [
                     "*.*"
-                ]
+                ],
+                limit : 100,
+                offset :  80
             },
       });
       return items
