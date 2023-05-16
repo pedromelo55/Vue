@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Servidores</h2>
+        <h2>Servi dores</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam debitis,
         ipsum expedita doloremque modi incidunt itaque quis asperiores consequatur repellat.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam debitis,
