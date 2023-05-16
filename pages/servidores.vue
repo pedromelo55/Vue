@@ -8,16 +8,18 @@
         <div class="grid grid-cols-4 gap-5 items-stretch">
           <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
         </div>
-        <div>
-          <Pagination/>
+        <div class="flex flex-row">
+          <Pagination  @changePage="change(p)" :pagina="pagina" :page="pages"/>
         </div>
     </div>
 </template>
 
 <script setup>
-import Pagination from '~/components/pagination.vue';
+// import Pagination from '~/components/pagination.vue';
 
   const { getItems } = useDirectusItems();
+
+  const pagina = ref(2)
 
   const fetchArticles = async () => {
     try {
@@ -29,7 +31,8 @@ import Pagination from '~/components/pagination.vue';
                 fields: [
                     "*.*"
                 ],
-                limit : 300,
+                limit : 20,
+                page : pagina.value
             },
       });
       return items
@@ -38,10 +41,8 @@ import Pagination from '~/components/pagination.vue';
 
   const servidores = await fetchArticles();
 
-  // console.log(servidores);
+  const pages = [1,2,3,4,5,6,7,8,9,10,11,12,13]
 
-
-  
 </script>
 
 <style scoped>

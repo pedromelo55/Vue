@@ -46,7 +46,7 @@
 <script setup>
 import { initFlowbite } from 'flowbite'
 const props = defineProps(['servidor'])
-// import { onMounted } from 'vue'
+
  
 
 // initialize components based on data attribute selectors
