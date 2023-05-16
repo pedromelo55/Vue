@@ -16,6 +16,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "flowbite": "^1.6.5",
     "vue3-blocks-tree": "^0.6.1"
   }
 }

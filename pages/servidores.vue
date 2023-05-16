@@ -29,8 +29,7 @@ import Pagination from '~/components/pagination.vue';
                 fields: [
                     "*.*"
                 ],
-                limit : 100,
-                offset :  80
+                limit : 300,
             },
       });
       return items

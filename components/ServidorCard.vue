@@ -30,7 +30,7 @@
             />
             <h5 class="mb-1 text-center text-xl font-medium text-gray-900 dark:text-white">{{ servidor.nome }}</h5>
             <h6 class="mb-1 text-center text-l font-medium text-gray-600 dark:text-white">{{ servidor.lotacao.unidade }}</h6>
-            <!-- <span class="text-sm text-gray-500 dark:text-gray-400">Talvez colocar cargo</span> -->
+            <span class="text-sm text-gray-500 dark:text-gray-400">Talvez colocar cargo</span>
             <div class="flex mt-4 space-x-3 md:mt-6">
                 <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700
                 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700
@@ -44,8 +44,15 @@
 </template>
 
 <script setup>
-    
+import { initFlowbite } from 'flowbite'
 const props = defineProps(['servidor'])
+// import { onMounted } from 'vue'
+ 
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+    initFlowbite();
+})
 
 </script>
 
