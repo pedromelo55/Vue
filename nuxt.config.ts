@@ -23,6 +23,6 @@ export default defineNuxtConfig({
     },
     build: {
         transpile: ['primevue']
-    }
+    },
 
 })
