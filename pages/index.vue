@@ -4,9 +4,7 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam debitis,
         ipsum expedita doloremque modi incidunt itaque quis asperiores consequatur repellat.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam debitis,
-        ipsum expedita doloremque modi incidunt itaque quis asperiores consequatur repellat.</p>
-
-                
+        ipsum expedita doloremque modi incidunt itaque quis asperiores consequatur repellat.</p>       
     </div>
 </template>
 

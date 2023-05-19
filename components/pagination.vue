@@ -1,6 +1,7 @@
 <template>
     <div v-for="pagina in page">
       <button class="bg-goias-50 hover:bg-goias-100 text-white font-bold mt-2 py-2 px-4 border-b-4 border-goias-150 hover:border-goias-50 rounded" 
+      @click="$emit('changePage')"
       >{{ pagina }} </button>
     </div>
 </template>
