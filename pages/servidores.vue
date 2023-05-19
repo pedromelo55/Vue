@@ -6,7 +6,7 @@
         <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
       </div>
       <div class="flex flex-row gap-1">
-        <Pagination  @changePage="" :pagina="pagina" :page="pages"/>
+        <Pagination  @changePage="newPage" :pagina="pagina" :page="pages"/>
       </div>
       
       <div class="flex flex-col items-center">
@@ -22,7 +22,7 @@
             </button>
             <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             @click="teste">
-                Proximo
+                Proximo 
             </button>
         </div>
       </div>
@@ -61,8 +61,9 @@ const servidores = await fetchArticles();
 
 const pages = [1,2,3,4,5,6,7,8,9,10,11,12,13]
 
+
 function teste(){
-  console.log(pagina.value++)
+  pagina = ref(2)
 }
 
 </script>
