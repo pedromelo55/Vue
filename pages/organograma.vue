@@ -13,6 +13,10 @@
 </template>
 
 <script>
+    definePageMeta({
+        layout: 'org'
+    })
+
     import { defineComponent,ref,reactive } from 'vue';
 
 export default defineComponent({

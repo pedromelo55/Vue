@@ -9,7 +9,11 @@ body{
 
 @layer components {
     .btn {
-        @apply bg-[#12b488] text-white px-3 py-2 rounded-md text-sm text-white;
+        @apply bg-goias-50 text-white px-3 py-2 rounded-md text-sm hover:bg-goias-100 hover:text-white active:bg-goias-100;
+    }
+
+    .btn_active {
+        @apply bg-goias-100 text-white px-3 py-2 rounded-md text-sm hover:bg-goias-100 hover:text-white active:bg-goias-100;
     }
 
     .card {
