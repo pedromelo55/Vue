@@ -1,7 +1,7 @@
 <template>
   <div>
       <h2>Servidores</h2>
-      <p>Texto aleatório em português</p>
+      <p>Texto aleatório em português. Teste</p>
       <div class="grid grid-cols-4 gap-5 items-stretch">
         <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
       </div>
