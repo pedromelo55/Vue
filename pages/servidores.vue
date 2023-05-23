@@ -6,15 +6,15 @@
         <!--Filtro por gerencia-->
         <div>
           <label for="unidades">Filtrar por unidade: </label>
-          <select name="unidades" id="unidades" class="ml-2 py-1 border-2 border-gray-200 rounded-lg ">
-            <option value="teste1">Teste</option>
-            <option value="teste2">Teste 2</option>
+          <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg" v-model="nome">
+            <option></option>
+            <option v-for="items in servidores">{{items.lotacao.unidade}}</option>
           </select>
         </div>
 
         <!--Filtro por nome-->
         <div class="text-right">
-          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2" placeholder="Pesquise por nome">
+          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2" placeholder="Pesquise por nome" id="a">
           <button class="btn">Pesquisar</button>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class="flex flex-col items-center mt-4">
         <!-- Help text -->
         <span class="text-sm text-gray-700 dark:text-gray-400">
-            Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">13</span>
+            Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">{{ paginas }}</span>
         </span>
         <!-- Buttons -->
         <div class="inline-flex mt-2 xs:mt-0 gap-2">
@@ -54,7 +54,8 @@
 const pagina = ref(1)
 const limite = ref(20)
 const servidores = ref({}) // corrigir o nome
-
+const paginas = ref(1);
+const nome = ref("Comunicação Setorial")
 
 
 // const { getItems } = useDirectusItems();
@@ -77,25 +78,29 @@ const servidores = ref({}) // corrigir o nome
 //   } catch (e) {}
 // };
 // const servidores = await fetchArticles();
-async function carregaServidores(numPagina: number) {
+async function carregaServidores(numPagina: number, numLimite: number) {
   useDirectusItems().getItems({
       collection: "servidores",
+      
       params: {
-        fields: [
-          "*.*"
-        ],
-        limit: 20,
+        // filter: {},
+        fields: ["cpf","nome","lotacao.unidade"],
+        limit: numLimite,
         page: numPagina,
-        sort: "nome"
+        sort: "nome",
+        meta: "filter_count"
       },
-    }).then((data) => servidores.value = data);
+    }).then((data) => {
+      servidores.value = data.data;
+      paginas.value = Math.ceil((data.meta?.filter_count ?? 1)/numLimite);
+    });
 }
 
 watch(
-  pagina,(newValue)=>carregaServidores(newValue)
+  [pagina,limite],([novaPagina,novoLimite])=>carregaServidores(novaPagina,novoLimite)
   ,{ immediate: true }
 )
-const pages = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+
 
 function anterior(){
   if(pagina.value > 1){
