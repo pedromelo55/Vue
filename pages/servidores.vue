@@ -2,17 +2,20 @@
   <div>
       <h2>Servidores</h2>
       <p>Texto aleatório em português. Teste de github</p>
+
+      <!--Carregar cards dos servidores-->
       <div class="grid grid-cols-4 gap-5 items-stretch">
         <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
       </div>
-      <div class="flex flex-row gap-1">
-        <Pagination  @changePage="" :pagina="pagina" :page="pages"/>
-      </div>
       
-      <div class="flex flex-col items-center">
+      <!-- <div class="flex flex-row gap-1">
+        <Pagination  @changePage="" :pagina="pagina" :page="pages"/>
+      </div> -->
+      
+      <div class="flex flex-col items-center mt-4">
         <!-- Help text -->
         <span class="text-sm text-gray-700 dark:text-gray-400">
-            Exibindo <span class="font-semibold text-gray-900 dark:text-white">1</span> até <span class="font-semibold text-gray-900 dark:text-white">20</span> dos <span class="font-semibold text-gray-900 dark:text-white">100</span> Servidores
+            Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">13</span>
         </span>
         <!-- Buttons -->
         <div class="inline-flex mt-2 xs:mt-0 gap-2">
@@ -63,6 +66,9 @@ async function carregaServidores(numPagina: number) {
   useDirectusItems().getItems({
       collection: "servidores",
       params: {
+        fields: [
+          "*.*"
+        ],
         limit: 20,
         page: numPagina,
         sort: "nome"
