@@ -1,8 +1,23 @@
 <template>
   <div>
       <h2>Servidores</h2>
-      <p>Texto aleatório em português. Teste de github</p>
+  
+      <div class="flex items-center justify-between border-2 border-gray-200 rounded-lg my-4 px-2">
+        <!--Filtro por gerencia-->
+        <div>
+          <label for="unidades">Filtrar por unidade: </label>
+          <select name="unidades" id="unidades" class="ml-2 py-1 border-2 border-gray-200 rounded-lg ">
+            <option value="teste1">Teste</option>
+            <option value="teste2">Teste 2</option>
+          </select>
+        </div>
 
+        <!--Filtro por nome-->
+        <div class="text-right">
+          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2" placeholder="Pesquise por nome">
+          <button class="btn">Pesquisar</button>
+        </div>
+      </div>
       <!--Carregar cards dos servidores-->
       <div class="grid grid-cols-4 gap-5 items-stretch">
         <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
@@ -94,8 +109,6 @@ function proximo(){
       pagina.value++
     }
   }
-
-
 
 </script>
 
