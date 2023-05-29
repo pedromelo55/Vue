@@ -8,7 +8,7 @@
           <label for="unidades">Filtrar por unidade: </label>
           <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg outline-none focus:ring-0 focus:border-goias-50" v-model="unidade">
             <option></option>
-            <option v-for="items in servidores">{{items.lotacao.unidade}}</option>
+            <option  v-for="items in posts" :value="items.id" > {{items.unidade}} </option>
           </select>
         </div>
 
@@ -62,12 +62,15 @@
 <script setup lang="ts">
 // import Pagination from '~/components/pagination.vue';
 
+import { idText } from 'typescript';
+import Organograma from './organograma.vue';
+
 const pagina = ref(1)
 const limite = ref(20)
-const servidores = ref({}) // corrigir o nome
+const servidores = ref({}) 
 const paginas = ref(1);
 const nome = ref("");
-const unidade = ref("Comunicação Setorial")
+const unidade = ref(0);
 
 
 // const { getItems } = useDirectusItems();
@@ -90,15 +93,15 @@ const unidade = ref("Comunicação Setorial")
 //   } catch (e) {}
 // };
 // const servidores = await fetchArticles();
-async function carregaServidores(numPagina: number, numLimite: number, strNome: string) {
-  //var testeternario = strNome != null ?  {"nome":{"_contains":strNome}} : {};
+async function carregaServidores(numPagina: number, numLimite: number, strNome: string, numUnidade: number) {
+  // var testeternario = strNome != null ?  {"nome":{"_contains":strNome}} : {};
   useDirectusItems().getItems({
       collection: "servidores",
-    
       params: {
-        filter: {"nome":{"_contains":strNome}},
-        // filter: testeternario,
-        fields: ["cpf","nome","lotacao.unidade"],
+        //filter: {lotacao:{unidade: 1},
+        //filter: {"nome":{"_contains":strNome}},
+        //filter: testeternario,
+        fields: ["cpf","nome","lotacao.unidade", "lotacao"],
         limit: numLimite,
         page: numPagina,
         sort: "nome",
@@ -110,8 +113,12 @@ async function carregaServidores(numPagina: number, numLimite: number, strNome: 
     });
 }
 
+const { getItems } = useDirectusItems()
+const posts = await getItems({ collection: "organograma" });
+
+
 watch(
-  [pagina,limite,nome],([novaPagina,novoLimite,novoNome])=>carregaServidores(novaPagina,novoLimite,novoNome)
+  [pagina,limite,nome,unidade],([novaPagina,novoLimite,novoNome,novaUnidade])=>carregaServidores(novaPagina,novoLimite,novoNome,novaUnidade)
   ,{ immediate: true }
 )
 
