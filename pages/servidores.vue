@@ -6,18 +6,18 @@
         <!--Filtro por gerencia-->
         <div>
           <label for="unidades">Filtrar por unidade: </label>
-          <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg" v-model="nome">
+          <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg outline-none focus:ring-0 focus:border-goias-50" v-model="nome">
             <option></option>
             <option v-for="items in servidores">{{items.lotacao.unidade}}</option>
           </select>
         </div>
-
         <!--Filtro por nome-->
         <div class="text-right">
-          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2" placeholder="Pesquise por nome" id="a">
+          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50" placeholder="Pesquise por nome" id="a">
           <button class="btn">Pesquisar</button>
         </div>
       </div>
+      
       <!--Carregar cards dos servidores-->
       <div class="grid grid-cols-4 gap-5 items-stretch">
         <ServidorCard v-for="(item, i) in servidores" :key="i" :servidor="item"/>
@@ -27,6 +27,12 @@
         <Pagination  @changePage="" :pagina="pagina" :page="pages"/>
       </div> -->
       
+        <!--Select para escolher quantos servidores serão exibidos por página-->
+      <span class="inline-block mt-4">Exibindo 
+        <select v-model="limite" class="rounded border-">
+        <option v-for="item in [10,20,30,40,50]">{{ item }}</option>
+      </select> servidores por página.</span>
+
       <div class="flex flex-col items-center mt-4">
         <!-- Help text -->
         <span class="text-sm text-gray-700 dark:text-gray-400">
@@ -38,13 +44,17 @@
             @click="anterior">
                 Anterior
             </button>
+
+            <select v-model="pagina" class="rounded border-goias-50 outline-none focus:ring-0 focus:border-goias-50">
+              <option v-for="item in paginas">{{ item }}</option>
+            </select>
+
             <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            @click="proximo">
+            @click="proximo(); moveTo()">
                 Proximo 
             </button>
         </div>
       </div>
-
   </div>
 </template>
 
@@ -101,6 +111,19 @@ watch(
   ,{ immediate: true }
 )
 
+function moveTo () {
+      let to = this.moveToDown
+        ? this.$refs.description.offsetTop - 60
+        : 0
+
+      window.scroll({
+        top: to,
+        left: 0,
+        behavior: 'smooth'
+      })
+
+      this.moveToDown = !this.moveToDown
+    }
 
 function anterior(){
   if(pagina.value > 1){
@@ -108,12 +131,18 @@ function anterior(){
   }
 }
 
+function changePage(){
+  var page = document.getElementById("mudarPagina").value;
+  pagina.value = page;
+}
 
 function proximo(){
-    if(pagina.value < 13){
+    if(pagina.value < paginas.value){
       pagina.value++
     }
   }
+
+  
 
 </script>
 
@@ -125,6 +154,7 @@ function proximo(){
   p {
       margin: 20px 0;
   }
+
 </style>
 
 <!-- colocar uma busca na tela -->
