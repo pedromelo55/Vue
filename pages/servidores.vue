@@ -6,16 +6,17 @@
         <!--Filtro por gerencia-->
         <div>
           <label for="unidades">Filtrar por unidade: </label>
-          <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg outline-none focus:ring-0 focus:border-goias-50" v-model="nome">
+          <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg outline-none focus:ring-0 focus:border-goias-50" v-model="unidade">
             <option></option>
             <option v-for="items in servidores">{{items.lotacao.unidade}}</option>
           </select>
         </div>
+
         <!--Filtro por nome-->
         <div class="text-right">
-          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50" placeholder="Pesquise por nome" id="a">
-          <button class="btn">Pesquisar</button>
+          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50" placeholder="Pesquise por nome" v-model="nome">
         </div>
+        
       </div>
       
       <!--Carregar cards dos servidores-->
@@ -65,7 +66,8 @@ const pagina = ref(1)
 const limite = ref(20)
 const servidores = ref({}) // corrigir o nome
 const paginas = ref(1);
-const nome = ref("Comunicação Setorial")
+const nome = ref("");
+const unidade = ref("Comunicação Setorial")
 
 
 // const { getItems } = useDirectusItems();
@@ -88,12 +90,14 @@ const nome = ref("Comunicação Setorial")
 //   } catch (e) {}
 // };
 // const servidores = await fetchArticles();
-async function carregaServidores(numPagina: number, numLimite: number) {
+async function carregaServidores(numPagina: number, numLimite: number, strNome: string) {
+  //var testeternario = strNome != null ?  {"nome":{"_contains":strNome}} : {};
   useDirectusItems().getItems({
       collection: "servidores",
-      
+    
       params: {
-        // filter: {},
+        filter: {"nome":{"_contains":strNome}},
+        // filter: testeternario,
         fields: ["cpf","nome","lotacao.unidade"],
         limit: numLimite,
         page: numPagina,
@@ -107,7 +111,7 @@ async function carregaServidores(numPagina: number, numLimite: number) {
 }
 
 watch(
-  [pagina,limite],([novaPagina,novoLimite])=>carregaServidores(novaPagina,novoLimite)
+  [pagina,limite,nome],([novaPagina,novoLimite,novoNome])=>carregaServidores(novaPagina,novoLimite,novoNome)
   ,{ immediate: true }
 )
 
