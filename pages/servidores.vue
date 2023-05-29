@@ -131,11 +131,6 @@ function anterior(){
   }
 }
 
-function changePage(){
-  var page = document.getElementById("mudarPagina").value;
-  pagina.value = page;
-}
-
 function proximo(){
     if(pagina.value < paginas.value){
       pagina.value++
