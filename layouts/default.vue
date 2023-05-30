@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white">
-        <header class="shadow-sm bg-slate-200">
+        <header class="shadow-sm bg-slate-100">
             <nav class="container mx-auto p-4 flex justify-between">
                 <div class="flex gap-5">
                     <img src="../layouts/img/goias-secti.svg" alt="Logo SECTI" class="w-20 h-15">
