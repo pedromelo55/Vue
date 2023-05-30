@@ -94,12 +94,12 @@ const unidade = ref(0);
 // };
 // const servidores = await fetchArticles();
 async function carregaServidores(numPagina: number, numLimite: number, strNome: string, numUnidade: number) {
-  // var testeternario = strNome != null ?  {"nome":{"_contains":strNome}} : {};
+  //var testeternario = strNome != null ?  {"nome":{"_contains":strNome}} : {};
   useDirectusItems().getItems({
       collection: "servidores",
       params: {
         //filter: {lotacao:{unidade: 1},
-        //filter: {"nome":{"_contains":strNome}},
+        filter:  strNome != "" ?  {"nome":{"_contains":strNome}} : {},
         //filter: testeternario,
         fields: ["cpf","nome","lotacao.unidade", "lotacao"],
         limit: numLimite,
