@@ -7,14 +7,14 @@
         <div>
           <label for="unidades">Filtrar por unidade: </label>
           <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg outline-none focus:ring-0 focus:border-goias-50" v-model="unidade">
-            <option></option>
             <option  v-for="items in posts" :value="items.id" > {{items.unidade}} </option>
           </select>
         </div>
 
         <!--Filtro por nome-->
         <div class="text-right">
-          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50" placeholder="Pesquise por nome" v-model="nome">
+          <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50" 
+          placeholder="Pesquise por nome" v-model="nome">
         </div>
         
       </div>
@@ -41,7 +41,8 @@
         </span>
         <!-- Buttons -->
         <div class="inline-flex mt-2 xs:mt-0 gap-2">
-            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
+            dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             @click="anterior">
                 Anterior
             </button>
@@ -50,7 +51,8 @@
               <option v-for="item in paginas">{{ item }}</option>
             </select>
 
-            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
+            dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             @click="proximo(); moveTo()">
                 Proximo 
             </button>
@@ -93,14 +95,11 @@ const unidade = ref(0);
 //   } catch (e) {}
 // };
 // const servidores = await fetchArticles();
-async function carregaServidores(numPagina: number, numLimite: number, strNome: string, numUnidade: number) {
-  //var testeternario = strNome != null ?  {"nome":{"_contains":strNome}} : {};
+async function carregaServidores(numPagina: number, numLimite: number, strNome: string) {
   useDirectusItems().getItems({
       collection: "servidores",
       params: {
-        //filter: {lotacao:{unidade: 1},
         filter:  strNome != "" ?  {"nome":{"_contains":strNome}} : {},
-        //filter: testeternario,
         fields: ["cpf","nome","lotacao.unidade", "lotacao"],
         limit: numLimite,
         page: numPagina,
@@ -114,11 +113,26 @@ async function carregaServidores(numPagina: number, numLimite: number, strNome: 
 }
 
 const { getItems } = useDirectusItems()
-const posts = await getItems({ collection: "organograma" });
+const teste = async () => {
+  try {
+    const filters = { content: "testcontent", title: "Test1" };
+    const items = await getItems({
+      collection: "organograma",
+      params: {
+              // filter: {id:4},
+              fields: [
+                  "*.*"
+              ],
+          },
+    });
+    return items
+  } catch (e) {}
+};
+const posts = await teste()
 
 
 watch(
-  [pagina,limite,nome,unidade],([novaPagina,novoLimite,novoNome,novaUnidade])=>carregaServidores(novaPagina,novoLimite,novoNome,novaUnidade)
+  [pagina,limite,nome],([novaPagina,novoLimite,novoNome])=>carregaServidores(novaPagina,novoLimite,novoNome)
   ,{ immediate: true }
 )
 
