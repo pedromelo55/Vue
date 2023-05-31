@@ -14,7 +14,7 @@
         <!--Filtro por nome-->
         <div class="text-right">
           <input type="text" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50" 
-          placeholder="Pesquise por nome" v-model="nome">
+          placeholder="Pesquise por nome" v-model="nome" @keyup="voltarPaginaInicial">
         </div>
         
       </div>
@@ -43,7 +43,7 @@
         <div class="inline-flex mt-2 xs:mt-0 gap-2">
             <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
             dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            @click="anterior">
+            @click="anterior(); scrollTop()">
                 Anterior
             </button>
 
@@ -53,7 +53,7 @@
 
             <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
             dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            @click="proximo(); moveTo()">
+            @click="proximo(); scrollTop()">
                 Proximo 
             </button>
         </div>
@@ -136,19 +136,29 @@ watch(
   ,{ immediate: true }
 )
 
-function moveTo () {
-      let to = this.moveToDown
-        ? this.$refs.description.offsetTop - 60
-        : 0
+// function moveTo () {
+//       let to = this.moveToDown
+//         ? this.$refs.description.offsetTop - 60
+//         : 0
 
-      window.scroll({
-        top: to,
-        left: 0,
-        behavior: 'smooth'
-      })
+//       window.scroll({
+//         top: to,
+//         left: 0,
+//         behavior: 'smooth'
+//       })
 
-      this.moveToDown = !this.moveToDown
-    }
+//       this.moveToDown = !this.moveToDown
+//     }
+
+function voltarPaginaInicial(){
+  // if(nome.value == novoNome){
+    pagina.value = 1
+  // }
+}
+
+function scrollTop() {
+  window.scrollTo(0, this.top);
+}
 
 function anterior(){
   if(pagina.value > 1){
