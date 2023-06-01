@@ -31,7 +31,7 @@
         <!--Select para escolher quantos servidores serão exibidos por página-->
       <span class="inline-block mt-4">Exibindo 
         <select v-model="limite" class="rounded border-">
-        <option v-for="item in [10,20,30,40,50,100]">{{ item }}</option>
+        <option v-for="item in [10,20,40,]">{{ item }}</option>
       </select> servidores por página.</span>
 
       <div class="flex flex-col items-center mt-4">
@@ -40,7 +40,7 @@
             Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">{{ paginas }}</span>
         </span>
         <!-- Buttons -->
-        <div class="inline-flex mt-2 xs:mt-0 gap-2">
+        <div class="inline-flex mt-2 mb-5 xs:mt-0 gap-2">
             <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
             dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             @click="anterior(); scrollTop()">
@@ -99,8 +99,8 @@ async function carregaServidores(numPagina: number, numLimite: number, strNome: 
   useDirectusItems().getItems({
       collection: "servidores",
       params: {
-        filter: {"unidade":strUnidade},
-        // filter:  strNome != "" ?  {"nome":{"_contains":strNome}} : {},
+        //filter: {"unidade":strUnidade},
+        filter:  strNome != "" ?  {"nome":{"_contains":strNome}} : {},
         fields: ["cpf","nome","lotacao.unidade", "lotacao"],
         // fields: ["*", "lotacao.unidade"],
         limit: numLimite,

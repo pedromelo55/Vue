@@ -12,6 +12,13 @@ module.exports = {
             "150" : "#096950"
           }
         },
+        fontFamily: {
+          prompt: ['Prompt'],
+          lato: ['Lato'],
+          playfairDisplay: ['Playfair Display'],
+          rubikPuddles: ['Rubik Puddles'],
+          inter: ['Inter'],
+        },
       },
     },
     plugins: [
