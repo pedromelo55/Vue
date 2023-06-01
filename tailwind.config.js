@@ -11,7 +11,14 @@ module.exports = {
             "100" : "#0c8b6a",
             "150" : "#096950"
           }
-        }
+        },
+        fontFamily: {
+          prompt: ['Prompt'],
+          lato: ['Lato'],
+          playfairDisplay: ['Playfair Display'],
+          rubikPuddles: ['Rubik Puddles'],
+          inter: ['Inter'],
+        },
       },
     },
     plugins: [

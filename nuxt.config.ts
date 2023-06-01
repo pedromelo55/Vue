@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            title: 'Organização SECTI',
+            title: 'OrganoGOV',
             meta: [
                 { name: 'description', content: 'Everything about Nuxt 3' }
             ],

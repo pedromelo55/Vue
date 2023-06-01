@@ -7,7 +7,7 @@
         <div>
           <label for="unidades">Filtrar por unidade: </label>
           <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg outline-none focus:ring-0 focus:border-goias-50" v-model="unidade">
-            <option  v-for="items in posts" :value="items.id" > {{items.unidade}} </option>
+            <option  v-for="items in posts" :value="items.unidade" > {{items.unidade}} </option>
           </select>
         </div>
 
@@ -31,7 +31,7 @@
         <!--Select para escolher quantos servidores serão exibidos por página-->
       <span class="inline-block mt-4">Exibindo 
         <select v-model="limite" class="rounded border-">
-        <option v-for="item in [10,20,30,40,50]">{{ item }}</option>
+        <option v-for="item in [10,20,40,]">{{ item }}</option>
       </select> servidores por página.</span>
 
       <div class="flex flex-col items-center mt-4">
@@ -40,7 +40,7 @@
             Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">{{ paginas }}</span>
         </span>
         <!-- Buttons -->
-        <div class="inline-flex mt-2 xs:mt-0 gap-2">
+        <div class="inline-flex mt-2 mb-5 xs:mt-0 gap-2">
             <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
             dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             @click="anterior(); scrollTop()">
@@ -72,7 +72,7 @@ const limite = ref(20)
 const servidores = ref({}) 
 const paginas = ref(1);
 const nome = ref("");
-const unidade = ref(0);
+const unidade = ref("");
 
 
 // const { getItems } = useDirectusItems();
@@ -95,12 +95,14 @@ const unidade = ref(0);
 //   } catch (e) {}
 // };
 // const servidores = await fetchArticles();
-async function carregaServidores(numPagina: number, numLimite: number, strNome: string) {
+async function carregaServidores(numPagina: number, numLimite: number, strNome: string, strUnidade: string) {
   useDirectusItems().getItems({
       collection: "servidores",
       params: {
+        //filter: {"unidade":strUnidade},
         filter:  strNome != "" ?  {"nome":{"_contains":strNome}} : {},
         fields: ["cpf","nome","lotacao.unidade", "lotacao"],
+        // fields: ["*", "lotacao.unidade"],
         limit: numLimite,
         page: numPagina,
         sort: "nome",
@@ -132,7 +134,7 @@ const posts = await teste()
 
 
 watch(
-  [pagina,limite,nome],([novaPagina,novoLimite,novoNome])=>carregaServidores(novaPagina,novoLimite,novoNome)
+  [pagina,limite,nome,unidade],([novaPagina,novoLimite,novoNome,novaUnidade])=>carregaServidores(novaPagina,novoLimite,novoNome,novaUnidade)
   ,{ immediate: true }
 )
 
