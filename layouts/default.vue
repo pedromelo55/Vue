@@ -18,11 +18,13 @@
        <div class="container mx-auto p-4">
             <slot />
        </div>
-       <footer>
-            <hr>
-            <img src="../layouts/img/secti-positivo.png" alt="Logo da SECTI" class="mt-5 ml-5 ">
-        </footer>
     </div>
+
+    <footer class="bg-slate-100">
+        <hr>
+        <img src="../layouts/img/secti-positivo.png" alt="Logo da SECTI" class="mx-5 ml-5 ">
+    </footer>
+
 </template>
 
 <style scoped>
