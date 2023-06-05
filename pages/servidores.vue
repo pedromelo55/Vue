@@ -100,7 +100,12 @@ async function carregaServidores(numPagina: number, numLimite: number, strNome: 
       collection: "servidores",
       params: {
         //filter: {"unidade":strUnidade},
-        filter:  strNome != "" ?  {"nome":{"_contains":strNome}} : {},
+        //filter:  strNome != "" ?  {"nome":{"_contains":strNome}} : {},
+
+        //filter: strUnidade != "" ?  {"lotacao":{ "unidade": { "_contains":strUnidade}  }} : {},
+
+        filter: strNome != "" ?  {"nome":{"_contains":strNome}} : strUnidade != "" ?  {"lotacao":{ "unidade": { "_contains":strUnidade}  }} : {},
+
         fields: ["cpf","nome","lotacao.unidade", "lotacao"],
         // fields: ["*", "lotacao.unidade"],
         limit: numLimite,
