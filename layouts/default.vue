@@ -3,7 +3,7 @@
         <header class="shadow-sm bg-slate-100">
             <nav class="container mx-auto p-4 flex justify-between items-center">
                 <!--<img src="../layouts/img/goias-secti.svg" alt="Logo SECTI" class="w-20 h-15">-->
-                <NuxtLink to="/" class="font-bold text-2xl text-slate-800 flex items-center gap-2"><img src="../layouts/img/orgGO50.svg" alt="Logo OrgGO" class="h-12">OrganoGOV</NuxtLink>
+                <NuxtLink to="/" class="font-bold text-2xl text-slate-800 flex items-center gap-2"><img src="./img/Logo.png" alt="Logo OrgGO" class="h-12">OrganoGOV</NuxtLink>
 
                 <ul class="flex gap-4 text-black font-medium">
                     <li><NuxtLink to="/">Home</NuxtLink></li>
@@ -29,7 +29,7 @@
 
 <style scoped>
 .router-link-exact-active {
-    color: #0fac82;
+    color: #12b488;
 }
 
 </style>
