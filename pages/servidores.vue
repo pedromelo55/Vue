@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h2>Servidores Teste de Github</h2>
+      <h2>Servidores</h2>
   
       <div class="flex items-center justify-between border-2 border-gray-200 rounded-lg my-4 px-2">
         <!--Filtro por gerencia-->
