@@ -29,7 +29,8 @@ export default defineComponent({
 
         onMounted(async () => {
             await teste();
-            console.log(treeData);
+
+
         });
 
         const { getItems } = useDirectusItems()
@@ -48,20 +49,31 @@ export default defineComponent({
 
             items.forEach((item => {
                 const {id: some_id, unidade: label, unidades_filhas} = item;
-                
-                const children = unidades_filhas.map(child => ({
-                    label: child.unidade,
-                    some_id: child.id,
+                const children = unidades_filhas.map(child =>  ({
+                    children: {
+                        label: child.unidade,
+                        some_id: child.id,
+                    }
                 }))
-
-                treeData.push(label, some_id, children);
+                const father = {
+                    label,
+                    expand: false,
+                    some_id,
+                    children: [children]
+                }
+                
+                treeData.push(father);
 
             }))
             console.log(treeData);
+            
+            console.log(treeData.values());
 
     
         } catch (e) {}
         };
+
+
         
         
         // let treeData = reactive({
