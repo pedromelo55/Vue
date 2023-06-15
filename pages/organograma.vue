@@ -1,8 +1,7 @@
 <template>
    <h1>Basic</h1>
     <div>
-        <blocks-tree :data="modifiedString
-        " :horizontal="treeOrientation=='1'"  :collapsable="true"></blocks-tree>
+        <blocks-tree :data="modifiedString" :horizontal="treeOrientation=='1'"  :collapsable="true"></blocks-tree>
     </div>
 
     <h1>Change orientation</h1>
@@ -35,7 +34,11 @@ export default defineComponent({
         const { getItems } = useDirectusItems()
         
         let treeData = reactive([]);
+<<<<<<< HEAD
         let modifiedString = ref({});
+=======
+        let modifiedString = ref([]);
+>>>>>>> dbd38d79fb4504f56ed2510688a9a196950ba51f
         
         const teste = async () => {
         try {
