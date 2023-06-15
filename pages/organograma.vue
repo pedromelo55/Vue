@@ -34,11 +34,7 @@ export default defineComponent({
         const { getItems } = useDirectusItems()
         
         let treeData = reactive([]);
-<<<<<<< HEAD
         let modifiedString = ref({});
-=======
-        let modifiedString = ref([]);
->>>>>>> dbd38d79fb4504f56ed2510688a9a196950ba51f
         
         const teste = async () => {
         try {
