@@ -6,9 +6,9 @@
 
     <h1>Change orientation</h1>
 
-    <pre>{{ modifiedString }}</pre>
+    <pre>{{ treeData }}</pre>
 
-    <select v-model="treeOrientation">
+    <select v-model="treeOrientation" class="w-36">
         <option value="0">Vertical</option>
         <option value="1">Horizontal</option>
     </select>
