@@ -8,6 +8,7 @@
                 <ul class="flex gap-4 text-black font-medium">
                     <li><NuxtLink to="/">Home</NuxtLink></li>
                     <li><NuxtLink to="/servidores">Servidores</NuxtLink></li>
+                    <li><NuxtLink to="/cadastrar">Cadastrar</NuxtLink></li>
                     <li><NuxtLink to="/organograma">Organograma</NuxtLink></li>
                 </ul>
             </nav>
