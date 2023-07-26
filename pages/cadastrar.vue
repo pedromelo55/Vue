@@ -29,6 +29,15 @@
                         </div>
                     </div>
                 </div>
+                
+                <div>
+                    <label for="unidades">Filtrar por unidade: </label>
+                    <select class="ml-2 py-1 border-2 border-gray-200 rounded-lg outline-none focus:ring-0 focus:border-goias-50" v-model="unidade">
+                        <option value="" class="text-gray-500">Selecione uma unidade</option>
+                        <option  v-for="items in posts" :value="items.unidade" > {{items.unidade}} </option>
+                    </select>
+                </div>
+
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -36,7 +45,8 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input type="text" id="table-search-users" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+                    <input type="text" id="table-search-users" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-0 focus:border-goias-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-0 dark:focus:border-goias-50"
+                    placeholder="Pesquise por nome" v-model="nome" @keyup="voltarPaginaInicial">
                 </div>
             </div>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -49,16 +59,16 @@
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            Nome
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Position
+                            Unidade
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Status
+                            Ativo
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Ação
                         </th>
                     </tr>
                 </thead>
@@ -71,27 +81,61 @@
                             </div>
                         </td>
                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
+                            <img class="w-10 h-10 rounded-full" :src="'https://sgi.desenvolvimento.go.gov.br/perfil/'
+                                + servidor.cpf + '.jpg'" alt="Imagem do servidor"
+                                onerror="this.onerror=null; this.src='https://sgi.desenvolvimento.go.gov.br/perfil/0.png'">
                             <div class="pl-3">
                                 <div class="text-base font-semibold">{{ servidor.nome }}</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
+                                <div class="font-normal text-gray-500">Não vai precisar de email</div>
                             </div>  
                         </th>
                         <td class="px-6 py-4">
-                            React Developer
+                            {{ servidor.lotacao.unidade }}
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center">
-                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
+                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> {{ servidor.ativo }}
                             </div>
                         </td>
                         <td class="px-6 py-4">
                             <!-- Modal toggle -->
-                            <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                            <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar usuário</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="flex items-center justify-between">
+                    <!--Select para escolher quantos servidores serão exibidos por página-->
+                    <span class="inline-block mt-4">Exibindo 
+                        <select v-model="limite" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50">
+                        <option v-for="item in [10,20,40,60]">{{ item }}</option>
+                    </select> servidores por página.</span>
+
+                    <div class="flex flex-col items-center mt-4">
+                        <!-- Help text -->
+                        <span class="text-sm text-gray-700 dark:text-gray-400">
+                            Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">{{ paginas }}</span>
+                        </span>
+                        <!-- Buttons -->
+                        <div class="inline-flex mt-2 mb-5 xs:mt-0 gap-2">
+                            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
+                            dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            @click="anterior(); scrollTop()">
+                                Anterior
+                            </button>
+
+                            <select v-model="pagina" class="rounded border-goias-50 outline-none focus:ring-0 focus:border-goias-50">
+                            <option v-for="item in paginas">{{ item }}</option>
+                            </select>
+
+                            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
+                            dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            @click="proximo(); scrollTop()">
+                                Proximo 
+                            </button>
+                        </div>
+                    </div>
+                </div>
             <!-- Edit user modal -->
             <div id="editUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative w-full max-w-2xl max-h-full">
@@ -176,7 +220,7 @@ async function carregaServidores(numPagina: number, numLimite: number, strNome: 
       collection: "servidores",
       params: {
         filter: strNome != "" ?  {"nome":{"_contains":strNome}} : strUnidade != "" ?  {"lotacao":{ "unidade": { "_contains":strUnidade}  }} : {},
-        fields: ["cpf","nome","lotacao.unidade", "lotacao"],
+        fields: ["cpf","nome","lotacao.unidade", "lotacao","ativo"],
         limit: numLimite,
         page: numPagina,
         sort: "nome",
@@ -188,7 +232,51 @@ async function carregaServidores(numPagina: number, numLimite: number, strNome: 
     });
 }
 
+const teste = async () => {
+  try {
+    const filters = { content: "testcontent", title: "Test1" };
+    const items = await getItems({
+      collection: "organograma",
+      params: {
+              // filter: {id:4},
+              fields: [
+                  "*.*"
+              ],
+          },
+    });
+    return items
+  } catch (e) {}
+};
+const posts = await teste()
+
+watch(
+  [pagina,limite,nome,unidade],([novaPagina,novoLimite,novoNome,novaUnidade])=>carregaServidores(novaPagina,novoLimite,novoNome,novaUnidade)
+  ,{ immediate: true }
+)
+
 const { getItems } = useDirectusItems()
+
+function voltarPaginaInicial(){
+  // if(nome.value == novoNome){
+    pagina.value = 1
+  // }
+}
+
+function scrollTop() {
+  window.scrollTo(0, this.top);
+}
+
+function anterior(){
+  if(pagina.value > 1){
+    pagina.value--
+  }
+}
+
+function proximo(){
+    if(pagina.value < paginas.value){
+      pagina.value++
+    }
+  }
 
 // initialize components based on data attribute selectors
 onMounted(() => {
