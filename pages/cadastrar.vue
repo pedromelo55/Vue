@@ -52,12 +52,6 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="p-4">
-                            <div class="flex items-center">
-                                <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                            </div>
-                        </th>
                         <th scope="col" class="px-6 py-3">
                             Nome
                         </th>
@@ -74,12 +68,6 @@
                 </thead>
                 <tbody v-for="servidor in servidores">
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="w-4 p-4">
-                            <div class="flex items-center">
-                                <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                            </div>
-                        </td>
                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                             <img class="w-10 h-10 rounded-full" :src="'https://sgi.desenvolvimento.go.gov.br/perfil/'
                                 + servidor.cpf + '.jpg'" alt="Imagem do servidor"
@@ -104,39 +92,6 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="flex items-center justify-between">
-                    <!--Select para escolher quantos servidores serão exibidos por página-->
-                    <span class="inline-block mt-4">Exibindo 
-                        <select v-model="limite" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50">
-                        <option v-for="item in [10,20,40,60]">{{ item }}</option>
-                    </select> servidores por página.</span>
-
-                    <div class="flex flex-col items-center mt-4">
-                        <!-- Help text -->
-                        <span class="text-sm text-gray-700 dark:text-gray-400">
-                            Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">{{ paginas }}</span>
-                        </span>
-                        <!-- Buttons -->
-                        <div class="inline-flex mt-2 mb-5 xs:mt-0 gap-2">
-                            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
-                            dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            @click="anterior(); scrollTop()">
-                                Anterior
-                            </button>
-
-                            <select v-model="pagina" class="rounded border-goias-50 outline-none focus:ring-0 focus:border-goias-50">
-                            <option v-for="item in paginas">{{ item }}</option>
-                            </select>
-
-                            <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
-                            dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            @click="proximo(); scrollTop()">
-                                Proximo 
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            <!-- Edit user modal -->
             <div id="editUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative w-full max-w-2xl max-h-full">
                     <!-- Modal content -->
@@ -195,6 +150,38 @@
                             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save all</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-between">
+            <!--Select para escolher quantos servidores serão exibidos por página-->
+            <span class="inline-block mt-4">Exibindo 
+                <select v-model="limite" class="my-4 py-1 border-2 border-gray-200 rounded-lg mr-2 outline-none focus:ring-0 focus:border-goias-50">
+                <option v-for="item in [10,20,40,60]">{{ item }}</option>
+            </select> servidores por página.</span>
+
+            <div class="flex flex-col items-center mt-4">
+                <!-- Help text -->
+                <span class="text-sm text-gray-700 dark:text-gray-400">
+                    Página <span class="font-semibold text-gray-900 dark:text-white">{{ pagina }}</span> de <span class="font-semibold text-gray-900 dark:text-white">{{ paginas }}</span>
+                </span>
+                <!-- Buttons -->
+                <div class="inline-flex mt-2 mb-5 xs:mt-0 gap-2">
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-l hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
+                    dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    @click="anterior(); scrollTop()">
+                        Anterior
+                    </button>
+
+                    <select v-model="pagina" class="rounded border-goias-50 outline-none focus:ring-0 focus:border-goias-50">
+                    <option v-for="item in paginas">{{ item }}</option>
+                    </select>
+
+                    <button class="px-4 py-2 text-sm font-medium text-white bg-goias-50 rounded-r hover:bg-goias-100 dark:bg-gray-800 dark:border-gray-700 
+                    dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    @click="proximo(); scrollTop()">
+                        Proximo 
+                    </button>
                 </div>
             </div>
         </div>
@@ -281,6 +268,7 @@ function proximo(){
 // initialize components based on data attribute selectors
 onMounted(() => {
     initFlowbite();
+
 })
 
 </script>
